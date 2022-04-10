@@ -15,19 +15,19 @@ export const depWithController = async (req: express.Request, res: express.Respo
     const { account_number, remarks, amount }: DEPOSIT_WITHDRAW_SCHEMA = req.body;
 
     if (amount <= 0) {
-      res.status(400).json({ error: true, data: { message: [`Amount should be greater than rupees 0`] } });
+      res.status(201).json({ error: true, data: { message: [`Amount should be greater than rupees 0`] } });
       return;
     }
 
     if (remarks == 'WITHDRAW' || remarks == 'DEPOSIT') {
       const isAccountNumberValid = await isAccountNumberAvailableRepo(account_number);
       if (isAccountNumberValid.length === 0) {
-        res.status(400).json({ error: true, data: { message: [`Invalid account number!`] } });
+        res.status(201).json({ error: true, data: { message: [`Invalid account number!`] } });
         return;
       }
 
       if (remarks == 'WITHDRAW' && amount > isAccountNumberValid[0].account_balance) {
-        res.status(400).json({
+        res.status(201).json({
           error: true,
           data: {
             message: [
@@ -58,10 +58,10 @@ export const depWithController = async (req: express.Request, res: express.Respo
       await producerEmit('pp_user_topic', kafkaData, 'depWithCreated');
       return;
     } else {
-      res.status(400).json({ error: true, data: { message: [`Invalid remarks!`] } });
+      res.status(201).json({ error: true, data: { message: [`Invalid remarks!`] } });
       return;
     }
   } catch (err) {
-    res.status(400).json({ error: true, data: { message: [err.message] } });
+    res.status(201).json({ error: true, data: { message: [err.message] } });
   }
 };

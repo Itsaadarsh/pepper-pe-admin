@@ -14,7 +14,7 @@ export const adminLogin = async (req: Request, res: Response) => {
     const isAdminAvailable = await isAdminIDAvailableRepo(+admin_id);
 
     if (isAdminAvailable.length == 0) {
-      res.status(400).json({ error: true, data: { message: ['Invalid Admin ID'] } });
+      res.status(201).json({ error: true, data: { message: ['Invalid Admin ID'] } });
       return;
     }
 
@@ -27,10 +27,10 @@ export const adminLogin = async (req: Request, res: Response) => {
       res.status(201).json({ error: false, data: { token } });
       return;
     } else {
-      res.status(400).json({ error: true, data: { message: [`Incorrect Password, Try Again!`] } });
+      res.status(201).json({ error: true, data: { message: [`Incorrect Password, Try Again!`] } });
       return;
     }
   } catch (err) {
-    res.status(400).json({ error: true, data: { message: [err.message] } });
+    res.status(201).json({ error: true, data: { message: [err.message] } });
   }
 };

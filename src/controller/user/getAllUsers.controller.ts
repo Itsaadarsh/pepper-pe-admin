@@ -6,7 +6,7 @@ export const getAllUsersController = async (_: Request, res: Response) => {
     const userDetails = await getAllusersRepo();
 
     if (userDetails.length == 0) {
-      res.status(400).json({ error: true, data: { message: ['No users found'] } });
+      res.status(201).json({ error: true, data: { message: ['No users found'] } });
       return;
     }
 
@@ -28,6 +28,6 @@ export const getAllUsersController = async (_: Request, res: Response) => {
     res.status(201).json({ error: false, data: responseData });
     return;
   } catch (err) {
-    res.status(400).json({ error: true, data: { message: [err.message] } });
+    res.status(201).json({ error: true, data: { message: [err.message] } });
   }
 };

@@ -16,7 +16,7 @@ export const registerUser = async (req: express.Request, res: express.Response) 
 
     const isEmailAvailable = await isEmailAvailableRepo(email);
     if (isEmailAvailable.length != 0) {
-      res.status(400).json({ error: true, data: { message: [`This user is already registered`] } });
+      res.status(201).json({ error: true, data: { message: [`This user is already registered`] } });
       return;
     }
 
@@ -44,6 +44,6 @@ export const registerUser = async (req: express.Request, res: express.Response) 
       return;
     });
   } catch (err) {
-    res.status(400).json({ error: true, data: { message: [err.message] } });
+    res.status(201).json({ error: true, data: { message: [err.message] } });
   }
 };
