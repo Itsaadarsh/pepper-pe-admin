@@ -1,6 +1,6 @@
 import adminEntity from '../../entity/admin.entity';
 import bcrypt from 'bcrypt';
-import ppBankDetailsEntity from 'src/entity/ppBankDetails.entity';
+import ppBankDetailsEntity from '../../entity/ppBankDetails.entity';
 
 // All DB calls for admin login
 const isAdminIDAvailableRepo = async (admin_id: number) => {
