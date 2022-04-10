@@ -1,5 +1,6 @@
 import adminEntity from '../../entity/admin.entity';
 import bcrypt from 'bcrypt';
+import ppBankDetailsEntity from 'src/entity/ppBankDetails.entity';
 
 // All DB calls for admin login
 const isAdminIDAvailableRepo = async (admin_id: number) => {
@@ -15,4 +16,8 @@ const insertAdminRepo = async (admin_id: number, password: string) => {
   }).save();
 };
 
-export { isAdminIDAvailableRepo, insertAdminRepo };
+const getBankDetailsRepo = async () => {
+  return await ppBankDetailsEntity.find({});
+};
+
+export { isAdminIDAvailableRepo, insertAdminRepo, getBankDetailsRepo };
